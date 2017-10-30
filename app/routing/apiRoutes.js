@@ -1,5 +1,5 @@
 var path = require('path');
-var friendsArray = require("../datB/friends");
+var friendsArray = require("../data/friends");
 
 module.exports = function(app) {
 
