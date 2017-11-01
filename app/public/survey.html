@@ -25,6 +25,7 @@
         }
     </style>
 </head>
+<!-- Create form for questionaire -->
 
 <body>
     <div class="container">
@@ -190,11 +191,11 @@
             var enteredName = $("#name").val().trim();
             var enteredURL = $("#imageURL").val().trim();
 
-            //Validate if all info required is entered
+            //make sure all of the required information is included
             if (enteredName === "" || enteredURL === "") {
                 allInputProvided = false;
-                window.alert("You must enter Name and the Image URL");
-                console.log("You must enter Name and the Image URL");
+                window.alert("Name and Image URL required");
+                console.log("Name and Image URL required.");
             }
 
             if (allInputProvided) {
@@ -204,8 +205,8 @@
                     selectedOption = $(idOfQuestion).val().trim();
                     if (selectedOption === "") {
                         allInputProvided = false;
-                        window.alert("You must specify a option of 1 to 5 for all the questions");
-                        console.log("You must specify a option of 1 to 5 for all the questions");
+                        window.alert("Please make a selection 1-5");
+                        console.log("Please ma a selection 1-5");
                         break;
                     }
                     selections.push(selectedOption);
@@ -213,11 +214,11 @@
             }
 
             if (allInputProvided) {
-                // var newSurvey = {
-                // 	name: $("#name").val().trim(),
-                // 	imageURL: $("#imageURL").val().trim(),
-                // 	answers: selections
-                // };
+                var newSurvey = {
+                    name: $("#name").val().trim(),
+                    imageURL: $("#imageURL").val().trim(),
+                    answers: selections
+                };
 
                 var newSurvey = {
                     name: enteredName,
@@ -229,11 +230,11 @@
                     if (data) {
                         $("#friend-name").text(data.name);
                         $("#friend-image").attr("src", data.imageURL);
-                        $("#friend-image").attr("alt", "The Image URL " + data.imageURL + " provided by " + data.name + " is not allowing hot linking and the image cannot be displayed here. Please open that URL from the browser directly");
+                        $("#friend-image").attr("alt", "The Image URL " + data.imageURL + " provided by " + data.name + " is not displaying. Please copy from the browser directly.");
                     }
                 });
 
-                //Now we can clear it for the next friend submission.
+                //clear screen for next entry
                 $("#name").val("");
                 $("#imageURL").val("");
                 for (var i = 0; i < 10; i++) {
@@ -241,10 +242,10 @@
                     $(idOfQuestion).val("");
                 }
             } else {
-                $("#friend-name").text("You Didn't Enter Your Profile. No Friend Can be Suggested");
+                $("#friend-name").text("You need to enter a profile before a friend can be suggested.");
                 $("#friend-image").attr("src", "");
                 $("#friend-image").attr("alt", "");
-                window.alert("Sorry ..No Friend Found ..You didnt provide your profile");
+                window.alert("No friend can be suggested without completing your profile.");
             }
         });
     </script>
